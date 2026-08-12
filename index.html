@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Khizar Abbas — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#a855f7;
+    --violet:#7c3aed;
+    --cyan:#2dd4e8;
+    --pink:#ec4899;
+    --blue:#3b82f6;
+    --base:#1c1240;
+    --white:#ffffff;
+    --muted:#d8d3ec;
+    --upwork:#1bb35c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--base);
+    color:var(--white);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ---------- Liquid aurora gradient background ---------- */
+  .bg-mesh{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    overflow:hidden;
+    background:linear-gradient(180deg,#2a1a55 0%, #1c1240 45%, #0f0a26 100%);
+  }
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:0.85;
+    will-change:transform;
+    mix-blend-mode:screen;
+  }
+  .blob1{width:750px;height:750px;background:radial-gradient(circle at 35% 35%, var(--purple), transparent 68%);top:-220px;left:-140px;animation:float1 20s ease-in-out infinite;}
+  .blob2{width:650px;height:650px;background:radial-gradient(circle at 45% 45%, var(--cyan), transparent 68%);top:120px;right:-160px;animation:float2 24s ease-in-out infinite;}
+  .blob3{width:600px;height:600px;background:radial-gradient(circle at 50% 50%, var(--pink), transparent 68%);top:600px;left:10%;animation:float3 26s ease-in-out infinite;}
+  .blob4{width:700px;height:700px;background:radial-gradient(circle at 50% 50%, var(--blue), transparent 68%);top:900px;right:5%;animation:float1 22s ease-in-out infinite reverse;}
+  .blob5{width:600px;height:600px;background:radial-gradient(circle at 50% 50%, var(--violet), transparent 68%);top:1500px;left:-100px;animation:float2 28s ease-in-out infinite reverse;}
+  .blob6{width:550px;height:550px;background:radial-gradient(circle at 50% 50%, var(--cyan), transparent 68%);bottom:0;right:-100px;animation:float3 24s ease-in-out infinite;}
+
+  @keyframes float1{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(90px,60px) scale(1.15);}}
+  @keyframes float2{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-80px,-40px) scale(1.1);}}
+  @keyframes float3{0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-60px,80px) scale(1.2);}}
+
+  .grain{position:fixed;inset:0;z-index:-1;background:rgba(10,6,25,0.18);}
+
+  /* ---------- Navbar ---------- */
+  nav{
+    position:sticky;top:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 40px;
+    background:rgba(20,12,45,0.35);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .logo{font-weight:800;font-size:20px;letter-spacing:-0.02em;}
+
+  .nav-left{display:flex;align-items:center;gap:16px;}
+
+  /* Hamburger Menu */
+  .menu-toggle{
+    display:none;
+    font-size:30px;
+    cursor:pointer;
+    color:var(--white);
+    background:transparent;
+    border:none;
+    padding:4px 8px;
+    line-height:1;
+  }
+
+  .nav-links{
+    display:flex;
+    gap:36px;
+    list-style:none;
+    align-items:center;
+  }
+  .nav-links a{
+    color:var(--muted);
+    text-decoration:none;
+    font-weight:500;
+    font-size:14.5px;
+    transition:color .2s;
+  }
+  .nav-links a.active,.nav-links a:hover{color:var(--white);}
+  
+  .btn-upwork{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--upwork);color:#fff;font-weight:600;font-size:14px;
+    padding:10px 20px;border-radius:8px;text-decoration:none;
+    box-shadow:0 6px 20px rgba(27,179,92,0.4);
+    transition:transform .2s, box-shadow .2s;
+    white-space:nowrap;
+  }
+  .btn-upwork:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(27,179,92,0.5);}
+
+  /* Hero */
+  .hero{
+    display:flex;align-items:center;justify-content:space-between;gap:60px;
+    padding:80px 40px 80px;
+    max-width:1320px;margin:0 auto;
+    flex-wrap:wrap;
+  }
+  .hero-text{flex:1;min-width:300px;}
+  .tag{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 16px;border-radius:20px;
+    border:1px solid rgba(255,255,255,0.35);
+    background:rgba(0,0,0,0.25);
+    font-size:12px;font-weight:600;letter-spacing:0.08em;color:var(--cyan);
+    margin-bottom:24px;
+  }
+  .hero h1{
+    font-size:52px;font-weight:800;line-height:1.12;letter-spacing:-0.02em;
+    margin-bottom:22px;
+    text-shadow:0 4px 30px rgba(0,0,0,0.3);
+  }
+  .hero p{color:var(--muted);font-size:17px;line-height:1.6;max-width:480px;margin-bottom:34px;}
+  .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-primary{
+    background:#fff;color:#1c1240;font-weight:700;font-size:15px;padding:15px 30px;border-radius:10px;
+    text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.25);
+    transition:transform .2s;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-secondary{
+    border:1px solid rgba(255,255,255,0.5);color:var(--white);font-weight:600;font-size:15px;
+    padding:15px 30px;border-radius:10px;text-decoration:none;transition:background .2s;
+  }
+  .btn-secondary:hover{background:rgba(255,255,255,0.12);}
+
+  /* ---- UPDATED: The Box with Khizar's Photo ---- */
+  .hero-visual{
+    width:380px;height:420px;border-radius:28px;flex-shrink:0;
+    /* Glass effect border aur shadow */
+    border:1px solid rgba(255,255,255,0.35);
+    box-shadow:0 30px 80px rgba(0,0,0,0.35);
+    position:relative;overflow:hidden;
+    
+    /* Apki profile image set kardi hai */
+    background-image: url('assets/profile-khizar.jpg'); 
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    
+    /* Isko theek karne ke liye background color bhi set kar diya */
+    background-color: var(--base); 
+  }
+
+  /* Section */
+  .section{padding:30px 40px 80px;position:relative;max-width:1320px;margin:0 auto;}
+  .section-header{max-width:640px;margin:0 0 48px;}
+  .eyebrow{
+    font-size:13px;font-weight:700;letter-spacing:0.2em;color:var(--cyan);
+    margin-bottom:14px;text-transform:uppercase;
+  }
+  .section h2{font-size:38px;font-weight:800;letter-spacing:-0.02em;margin-bottom:12px;}
+  .section-header p{color:var(--muted);font-size:16px;}
+
+  /* ---------- Project cards ---------- */
+  .projects-list{display:flex;flex-direction:column;gap:24px;}
+
+  .project-card{
+    position:relative;
+    border-radius:20px;
+    padding:26px 32px;
+    cursor:pointer;
+    overflow:visible;
+    border:1px solid rgba(255,255,255,0.18);
+    transition:border-color .3s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .project-card:hover{border-color:rgba(255,255,255,0.4);}
+  .project-card:active{transform:scale(0.99);}
+
+  .pc-wealth{background:linear-gradient(120deg,#2b4fb0,#4267d6);}
+  .pc-ahl{background:linear-gradient(120deg,#1e3a6e,#2e63c9);}
+  .pc-yumio{background:linear-gradient(120deg,#1f9d55,#3fc172);}
+  .pc-streamx{background:linear-gradient(120deg,#7a1414,#c22525);}
+
+  .pc-top{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .pc-tag{font-size:11px;font-weight:700;letter-spacing:0.14em;color:rgba(255,255,255,0.75);text-transform:uppercase;}
+  .pc-title{font-size:22px;font-weight:800;margin-top:4px;}
+  .pc-desc{font-size:14px;color:rgba(255,255,255,0.85);margin-top:8px;max-width:640px;line-height:1.55;}
+  .pc-hint{font-size:12.5px;color:rgba(255,255,255,0.65);font-weight:600;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+
+  .pc-expand{
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    transition:max-height .45s cubic-bezier(.22,1,.36,1), opacity .35s ease, margin-top .45s ease;
+    margin-top:0;
+  }
+  .project-card.open .pc-expand{
+    max-height:900px;
+    opacity:1;
+    margin-top:26px;
+  }
+  .project-card.open .pc-hint{opacity:0;}
+
+  .pc-expand-inner{
+    display:flex;gap:32px;align-items:flex-start;
+    background:rgba(0,0,0,0.18);
+    border-radius:16px;padding:24px;
+    flex-wrap:wrap;
+  }
+  .pc-phone{
+    position:relative;flex-shrink:0;
+    width:180px;
+    transform:translateY(14px) scale(0.94);
+    opacity:0;
+    transition:transform .45s cubic-bezier(.22,1,.36,1), opacity .4s ease;
+  }
+  .project-card.open .pc-phone{transform:translateY(0) scale(1);opacity:1;}
+  .pc-phone img{
+    width:100%;border-radius:20px;display:block;
+    box-shadow:0 20px 45px rgba(0,0,0,0.5);
+    border:4px solid rgba(0,0,0,0.6);
+  }
+
+  .pc-detail{flex:1;min-width:260px;}
+  .pc-screen-name{font-size:17px;font-weight:700;margin-bottom:10px;}
+  .pc-bullets{list-style:none;margin:0 0 20px;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .pc-bullets li{font-size:13.5px;color:rgba(255,255,255,0.88);line-height:1.55;padding-left:18px;position:relative;}
+  .pc-bullets li::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:#fff;}
+  .pc-nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .pc-next-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(255,255,255,0.92);color:#111;font-weight:700;font-size:13.5px;
+    padding:10px 20px;border-radius:30px;border:none;cursor:pointer;
+    transition:transform .2s, background .2s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .pc-next-btn:hover{transform:translateX(3px);background:#fff;}
+  .pc-next-btn:active{transform:scale(0.95);}
+  .pc-dots{display:flex;gap:6px;}
+  .pc-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.35);transition:background .25s, transform .25s;}
+  .pc-dot.active{background:#fff;transform:scale(1.3);}
+
+  .fade{animation:fadeIn .35s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  /* About */
+  .about{display:flex;justify-content:space-between;align-items:center;gap:60px;flex-wrap:wrap;}
+  .about-left{flex:1;min-width:300px;}
+  .about-left h2{font-size:32px;font-weight:800;margin-bottom:16px;line-height:1.25;}
+  .about-left p{color:var(--muted);font-size:16px;line-height:1.6;max-width:460px;}
+  .skills{display:flex;flex-wrap:wrap;gap:12px;max-width:420px;}
+  .pill{
+    padding:10px 18px;border-radius:20px;
+    background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);
+    font-size:14px;font-weight:500;
+  }
+
+  /* Footer */
+  footer{
+    padding:80px 40px 40px;text-align:center;
+    border-top:1px solid rgba(255,255,255,0.15);
+    background:rgba(10,6,25,0.35);
+  }
+  footer h2{font-size:28px;font-weight:800;margin-bottom:22px;}
+  .contact-row{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:15px;margin-bottom:28px;}
+  .footer-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .btn-email{
+    background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.35);
+    color:var(--white);font-weight:600;font-size:15px;padding:14px 28px;border-radius:10px;text-decoration:none;
+    transition:background .2s;
+  }
+  .btn-email:hover{background:rgba(255,255,255,0.2);}
+  .social-row{display:flex;justify-content:center;gap:28px;margin-bottom:22px;flex-wrap:wrap;}
+  .social-row a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}
+  .social-row a:hover{color:var(--white);}
+  .copyright{color:rgba(255,255,255,0.5);font-size:13px;}
+
+  /* ============================================================
+     RESPONSIVE DESIGN - COMPLETE FIXES
+     ============================================================ */
+
+  /* Tablets & Small Laptops */
+  @media(max-width:1024px){
+    .hero{padding:70px 30px;}
+    .hero h1{font-size:44px;}
+    .hero-visual{width:320px;height:360px;}
+    .section{padding:30px 30px 70px;}
+  }
+
+  /* Mobile Devices */
+  @media(max-width:768px){
+    nav{padding:14px 20px;}
+    .logo{font-size:18px;}
+    
+    /* Hamburger Menu - Show on mobile */
+    .menu-toggle{display:block;}
+    
+    .nav-links{
+      display:none;
+      flex-direction:column;
+      position:absolute;
+      top:66px;
+      left:0;
+      width:100%;
+      background:rgba(20,12,45,0.96);
+      backdrop-filter:blur(18px);
+      padding:20px 24px;
+      gap:18px;
+      border-bottom:1px solid rgba(255,255,255,0.12);
+      box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    }
+    .nav-links.show{
+      display:flex;
+    }
+    .nav-links a{font-size:16px;padding:8px 0;width:100%;}
+    
+    .btn-upwork{font-size:13px;padding:8px 16px;}
+    .hero{padding:50px 20px 40px;gap:40px;}
+    .hero h1{font-size:34px;}
+    .hero p{font-size:15px;}
+    .hero-visual{width:100%;height:260px;min-height:200px;}
+    .btn-primary,.btn-secondary{font-size:14px;padding:12px 24px;}
+    
+    .section{padding:20px 20px 60px;}
+    .section h2{font-size:30px;}
+    .section-header p{font-size:15px;}
+    
+    .project-card{padding:20px;}
+    .pc-title{font-size:20px;}
+    .pc-desc{font-size:13px;}
+    .pc-hint{font-size:11px;}
+    .pc-expand-inner{flex-direction:column;align-items:center;text-align:center;padding:16px;}
+    .pc-phone{width:160px;}
+    .pc-detail{min-width:auto;width:100%;}
+    .pc-bullets li{font-size:13px;text-align:left;}
+    .pc-nav{justify-content:center;}
+    .pc-next-btn{font-size:13px;padding:8px 18px;}
+    
+    .about{gap:40px;}
+    .about-left h2{font-size:28px;}
+    .about-left p{font-size:15px;}
+    .skills{max-width:100%;justify-content:center;}
+    .pill{font-size:13px;padding:8px 16px;}
+    
+    footer{padding:60px 20px 30px;}
+    footer h2{font-size:24px;}
+    .contact-row{font-size:14px;gap:14px;flex-direction:column;}
+    .btn-email{font-size:14px;padding:12px 24px;width:100%;}
+    .social-row{gap:20px;}
+  }
+
+  /* Small Mobile Phones */
+  @media(max-width:480px){
+    nav{padding:12px 16px;}
+    .logo{font-size:16px;}
+    .menu-toggle{font-size:26px;}
+    .hero h1{font-size:28px;}
+    .hero{padding:30px 16px 30px;gap:30px;}
+    .hero-visual{height:200px;}
+    .hero-buttons{gap:12px;}
+    .btn-primary,.btn-secondary{font-size:13px;padding:10px 20px;width:100%;text-align:center;}
+    
+    .section h2{font-size:26px;}
+    .project-card{padding:16px;}
+    .pc-title{font-size:18px;}
+    .pc-tag{font-size:10px;}
+    .pc-phone{width:140px;}
+    .pc-screen-name{font-size:15px;}
+    .pc-bullets li{font-size:12px;}
+    .pc-expand-inner{padding:12px;}
+    
+    .about-left h2{font-size:24px;}
+    .pill{font-size:12px;padding:6px 14px;}
+    
+    footer h2{font-size:20px;}
+    .btn-email{font-size:13px;padding:10px 16px;}
+    .copyright{font-size:12px;}
+  }
+
+  /* Very Small Screens (≤360px) */
+  @media(max-width:360px){
+    .hero h1{font-size:24px;}
+    .hero-visual{height:170px;}
+    .pc-phone{width:120px;}
+    .pc-expand-inner{padding:10px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-mesh">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+    <div class="blob blob5"></div>
+    <div class="blob blob6"></div>
+  </div>
+  <div class="grain"></div>
+
+  <nav>
+    <div class="nav-left">
+      <div class="logo">Khizar Abbas</div>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Menu">☰</button>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" onclick="closeMenu()">Home</a></li>
+      <li><a href="#work" onclick="closeMenu()">Work</a></li>
+      <li><a href="#about" onclick="closeMenu()">About</a></li>
+      <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+    </ul>
+    <a class="btn-upwork" href="https://www.upwork.com/freelancers/~01e77e5d48cdd28ee3?mp_source=share" target="_blank" rel="noopener">Hire me on Upwork</a>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <div class="tag">👋 AVAILABLE FOR FREELANCE</div>
+      <h1>Hi, I'm Khizar —<br>I craft digital<br>products that work.</h1>
+      <p>Graphic Designer &amp; multi-skilled remote assistant specializing in Figma, Photoshop and Illustrator — turning ideas into clean, professional digital experiences.</p>
+      <div class="hero-buttons">
+        <a href="#work" class="btn-primary">View My Work</a>
+        <a href="assets/Khizar_Abbas_CV.pdf" download class="btn-secondary">Download CV</a>
+      </div>
+    </div>
+    
+    <!-- Yeh woh box hai jisme ab aapki photo aa jayegi -->
+    <div class="hero-visual"></div>
+    
+  </section>
+
+  <section class="section" id="work">
+    <div class="section-header">
+      <div class="eyebrow">My Work</div>
+      <h2>Featured Projects</h2>
+      <p>Tap any project below to explore real screens from each app — click "Next" to see more.</p>
+    </div>
+
+    <div class="projects-list">
+
+      <div class="project-card pc-wealth" data-project="wealth">
+        <div class="pc-top">
+          <div>
+            <div class="pc-tag">Finance &amp; Investment App</div>
+            <div class="pc-title">Wealth Street</div>
+            <div class="pc-desc">A digital account opening and KYC platform for a wealth management firm, built to simplify onboarding for new investors — from registration through document verification — with a premium, trustworthy black-and-gold financial identity.</div>
+          </div>
+          <div class="pc-hint">Tap to explore →</div>
+        </div>
+        <div class="pc-expand">
+          <div class="pc-expand-inner">
+            <div class="pc-phone"><img src="assets/wealth-register.png" alt="Wealth Street screen"></div>
+            <div class="pc-detail">
+              <div class="pc-screen-name">Register — Account Creation</div>
+              <ul class="pc-bullets">
+                <li>Dark, premium header with the gold Wealth Street bull logo sets a trustworthy financial tone from the very first screen</li>
+                <li>Minimal 3-field form — Email, Password, Confirm Password — keeps signup friction low</li>
+                <li>Single bold "Submit" CTA creates one clear, focused next action</li>
+                <li>Sets up the multi-step onboarding flow — Dashboard, then KYC documents — that follows</li>
+              </ul>
+              <div class="pc-nav">
+                <button class="pc-next-btn">Next Screen →</button>
+                <div class="pc-dots"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card pc-ahl" data-project="ahl">
+        <div class="pc-top">
+          <div>
+            <div class="pc-tag">Stock Trading Platform</div>
+            <div class="pc-title">AHL NxG</div>
+            <div class="pc-desc">A real-time stock trading platform giving investors live KSE index data, portfolio tracking and market research tools in one place — balancing dense financial data with a clean, scannable layout so traders can act quickly and confidently.</div>
+          </div>
+          <div class="pc-hint">Tap to explore →</div>
+        </div>
+        <div class="pc-expand">
+          <div class="pc-expand-inner">
+            <div class="pc-phone"><img src="assets/ahl-login.png" alt="AHL NxG screen"></div>
+            <div class="pc-detail">
+              <div class="pc-screen-name">Login — Real &amp; Virtual Trading</div>
+              <ul class="pc-bullets">
+                <li>Live KSE 100 index and market status shown above the login form itself, establishing real-time credibility instantly</li>
+                <li>Real Trading vs Virtual Trading tabs let new users practice risk-free before trading with real money</li>
+                <li>Remember Me and Forgot Password support quick, friction-free re-entry for returning traders</li>
+                <li>Fingerprint icon signals biometric login support for faster, secure access</li>
+              </ul>
+              <div class="pc-nav">
+                <button class="pc-next-btn">Next Screen →</button>
+                <div class="pc-dots"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card pc-yumio" data-project="yumio">
+        <div class="pc-top">
+          <div>
+            <div class="pc-tag">Food Delivery App</div>
+            <div class="pc-title">Yumio</div>
+            <div class="pc-desc">A food delivery app covering the full ordering journey — browsing, cart, checkout and live order tracking — wrapped in a fresh, appetizing visual identity that makes discovering and ordering food feel effortless.</div>
+          </div>
+          <div class="pc-hint">Tap to explore →</div>
+        </div>
+        <div class="pc-expand">
+          <div class="pc-expand-inner">
+            <div class="pc-phone"><img src="assets/yumio-home.png" alt="Yumio screen"></div>
+            <div class="pc-detail">
+              <div class="pc-screen-name">Home — What's Cooking?</div>
+              <ul class="pc-bullets">
+                <li>Search bar with a voice-search icon for fast menu discovery</li>
+                <li>Quick category pills — Pizza, Burger, Salad — filter the menu instantly with one tap</li>
+                <li>"Today's Special" banner highlights a featured, high-margin item front and center</li>
+                <li>"Popular Right Now" grid uses real food photography to drive appetite and quick add-to-cart decisions</li>
+              </ul>
+              <div class="pc-nav">
+                <button class="pc-next-btn">Next Screen →</button>
+                <div class="pc-dots"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card pc-streamx" data-project="streamx">
+        <div class="pc-top">
+          <div>
+            <div class="pc-tag">Movie &amp; OTT Streaming App</div>
+            <div class="pc-title">StreamX</div>
+            <div class="pc-desc">A Netflix-style movie and OTT streaming app with catalog browsing, detailed title pages and a cinematic dark interface built to keep the content itself the hero of every screen.</div>
+          </div>
+          <div class="pc-hint">Tap to explore →</div>
+        </div>
+        <div class="pc-expand">
+          <div class="pc-expand-inner">
+            <div class="pc-phone"><img src="assets/streamx-home.png" alt="StreamX screen"></div>
+            <div class="pc-detail">
+              <div class="pc-screen-name">Home — Featured &amp; Trending</div>
+              <ul class="pc-bullets">
+                <li>Full-bleed hero banner for the featured title, complete with rating and runtime</li>
+                <li>Horizontally scrolling "Trending" row paired with a dedicated Watch Now CTA</li>
+                <li>"Recently Added" grid keeps the catalog feeling fresh on every visit</li>
+                <li>Bottom nav — Home, Profile, Catalog, Updates — mirrors familiar streaming-app patterns users already know</li>
+              </ul>
+              <div class="pc-nav">
+                <button class="pc-next-btn">Next Screen →</button>
+                <div class="pc-dots"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="about">
+      <div class="about-left">
+        <div class="eyebrow">About Me</div>
+        <h2>Turning ideas into polished experiences.</h2>
+        <p>I'm a detail-oriented Graphic Designer with 3+ years of hands-on experience in Photoshop, Figma and Illustrator, combined with fast, accurate typing, in-depth research and technical troubleshooting. Currently working full-time at Catalyst IT Solutions, and open to remote freelance projects that need speed, accuracy and creative versatility.</p>
+      </div>
+      <div class="skills">
+        <span class="pill">Adobe Photoshop</span>
+        <span class="pill">Figma</span>
+        <span class="pill">Adobe Illustrator</span>
+        <span class="pill">Fast Typing</span>
+        <span class="pill">Research &amp; Data Gathering</span>
+        <span class="pill">Technical Troubleshooting</span>
+        <span class="pill">Multitasking</span>
+        <span class="pill">Remote Collaboration</span>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <h2>Let's build something great together</h2>
+    <div class="contact-row">
+      <span>📞 +92 345 2720281</span>
+      <span>✉️ sg3256996@gmail.com</span>
+    </div>
+    <div class="footer-buttons">
+      <a class="btn-email" href="mailto:sg3256996@gmail.com">sg3256996@gmail.com</a>
+      <a class="btn-email" href="assets/Khizar_Abbas_CV.pdf" download>Download CV</a>
+      <a class="btn-upwork" href="https://www.upwork.com/freelancers/~01e77e5d48cdd28ee3?mp_source=share" target="_blank" rel="noopener">Hire me on Upwork</a>
+    </div>
+    <div class="social-row">
+      <a href="https://github.com/KhizarAbbas786" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/khizar-abbas-6b1a87371" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="copyright">© 2026 Khizar Abbas. All rights reserved.</div>
+  </footer>
+
+<script>
+  // ============================================
+  // HAMBURGER MENU FUNCTIONS
+  // ============================================
+  function toggleMenu() {
+    const nav = document.getElementById('navLinks');
+    nav.classList.toggle('show');
+  }
+
+  function closeMenu() {
+    const nav = document.getElementById('navLinks');
+    nav.classList.remove('show');
+  }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const nav = document.getElementById('navLinks');
+    const toggle = document.querySelector('.menu-toggle');
+    if (nav.classList.contains('show') && 
+        !nav.contains(event.target) && 
+        !toggle.contains(event.target)) {
+      nav.classList.remove('show');
+    }
+  });
+
+  // ============================================
+  // PROJECT CARDS SCREEN NAVIGATION
+  // ============================================
+  const PROJECT_SCREENS = {
+    wealth: [
+      { img: 'assets/wealth-register.png', name: 'Register — Account Creation', bullets: [
+        'Dark, premium header with the gold Wealth Street bull logo sets a trustworthy financial tone from the very first screen',
+        'Minimal 3-field form — Email, Password, Confirm Password — keeps signup friction low',
+        'Single bold "Submit" CTA creates one clear, focused next action',
+        'Sets up the multi-step onboarding flow — Dashboard, then KYC documents — that follows'
+      ]},
+      { img: 'assets/wealth-dashboard.png', name: 'Dashboard — Onboarding Hub', bullets: [
+        'Four core actions surfaced as icon cards: Create Account, Move from Another Broker, Check Status, Document Checklist',
+        'Icon-first design lets users scan and choose their path in seconds',
+        'Persistent Home and Logout icons keep navigation always accessible',
+        'Acts as the central hub that ties the entire onboarding journey together'
+      ]},
+      { img: 'assets/wealth-document.png', name: 'Document Submission — KYC', bullets: [
+        'Five clearly labeled upload fields: CNIC front & back, proof of income, proof of address, proof of relationship',
+        'Required fields marked with red asterisks to prevent incomplete submissions',
+        'Rounded upload fields with icon cues make the file-picker action obvious',
+        'A single "Next" button keeps the multi-document flow linear and stress-free'
+      ]}
+    ],
+    ahl: [
+      { img: 'assets/ahl-login.png', name: 'Login — Real & Virtual Trading', bullets: [
+        'Live KSE 100 index and market status shown above the login form itself, establishing real-time credibility instantly',
+        'Real Trading vs Virtual Trading tabs let new users practice risk-free before trading with real money',
+        'Remember Me and Forgot Password support quick, friction-free re-entry for returning traders',
+        'Fingerprint icon signals biometric login support for faster, secure access'
+      ]},
+      { img: 'assets/ahl-menu.png', name: 'Menu — Account Actions', bullets: [
+        '3x3 icon grid covers Home, Trade, Indices, Deposit, Withdraw, Statement, Research, Theme and Contact',
+        '"NEW" badges on Deposit and Statement highlight recently added features',
+        'Profile card at the top personalizes the menu with the user\'s name and email',
+        'Switch to Virtual Trading and Logout are kept clearly separated at the bottom to avoid mis-taps'
+      ]},
+      { img: 'assets/ahl-kse100.png', name: 'KSE 100 — Market Overview', bullets: [
+        'Index chart with 6 switchable timeframes, from 1 minute up to 1 hour',
+        'Regular vs Future trade stats shown side by side for quick comparison',
+        'Top market leaders list surfaces the most active stocks instantly',
+        'Persistent bottom nav — Watchlist, Accounts, Home, Holdings, Logs — for fast switching between views'
+      ]},
+      { img: 'assets/ahl-atrl.png', name: 'Stock Details — ATRL', bullets: [
+        'Live bid/ask prices displayed as large, color-coded action buttons for instant readability',
+        'Overview, Market Depth, About and Fundamentals tabs organize deep stock data without clutter',
+        'Price chart reuses the same timeframe controls as the main index view for consistency',
+        'One-tap Virtual Buy / Virtual Sell buttons shorten the path from research to trade'
+      ]}
+    ],
+    yumio: [
+      { img: 'assets/yumio-home.png', name: "Home — What's Cooking?", bullets: [
+        'Search bar with a voice-search icon for fast menu discovery',
+        'Quick category pills — Pizza, Burger, Salad — filter the menu instantly with one tap',
+        '"Today\'s Special" banner highlights a featured, high-margin item front and center',
+        '"Popular Right Now" grid uses real food photography to drive appetite and quick add-to-cart decisions'
+      ]},
+      { img: 'assets/yumio-order.png', name: 'Order Tracking — Live Delivery', bullets: [
+        'Full-width live map shows the rider\'s real-time location',
+        'Four-step status tracker — Placed, Preparing, On the way, Delivered — removes any guesswork',
+        'Rider card with photo, name and a one-tap Call button for direct contact',
+        'Order ID stays visible on screen for easy reference during support queries'
+      ]},
+      { img: 'assets/yumio-login.png', name: 'Login — Welcome Back', bullets: [
+        'Bold "Yumio" wordmark with a friendly "Welcome Back!" tagline sets a warm first impression',
+        'Google and Facebook sign-in reduce friction for returning users',
+        'Remember Me and Forgot Password support quick re-entry',
+        'Bright green gradient reinforces the brand\'s fresh, healthy identity'
+      ]},
+      { img: 'assets/yumio-settings.png', name: 'Settings — Preferences', bullets: [
+        'Preferences section: Push Notifications, Order Updates via SMS, Promotional Emails toggles',
+        'Account section: Language, Saved Addresses, Payment Methods, Change Password',
+        'About section: Help & Support, Terms & Privacy Policy, App Version',
+        'Persistent bottom nav keeps Settings one tap away from anywhere in the app'
+      ]}
+    ],
+    streamx: [
+      { img: 'assets/streamx-home.png', name: 'Home — Featured & Trending', bullets: [
+        'Full-bleed hero banner for the featured title, complete with rating and runtime',
+        'Horizontally scrolling "Trending" row paired with a dedicated Watch Now CTA',
+        '"Recently Added" grid keeps the catalog feeling fresh on every visit',
+        'Bottom nav — Home, Profile, Catalog, Updates — mirrors familiar streaming-app patterns users already know'
+      ]},
+      { img: 'assets/streamx-details.png', name: 'Movie Details — Overview', bullets: [
+        'Full-bleed backdrop artwork with poster thumbnail and star rating up top',
+        'Overview, Category, Original Title, Language, Release Date and Director laid out in a clean two-column grid',
+        'Cast row with circular avatars for fast, familiar recognition',
+        'Prominent Play and Download buttons stacked for one-tap access to either action'
+      ]},
+      { img: 'assets/streamx-settings.png', name: 'Settings — Playback & Account', bullets: [
+        'Account section: Edit Profile, Change Password, Email Preferences',
+        'Playback section: Autoplay Next Episode, Download over Wi-Fi Only, Video Quality',
+        'Notifications and Subtitles & Audio sections allow full personalization of the viewing experience',
+        'Clear red "Log out" action kept isolated at the bottom to prevent accidental taps'
+      ]}
+    ]
+  };
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    const key = card.dataset.project;
+    const screens = PROJECT_SCREENS[key];
+    let index = 0;
+
+    const img = card.querySelector('.pc-phone img');
+    const nameEl = card.querySelector('.pc-screen-name');
+    const bulletsEl = card.querySelector('.pc-bullets');
+    const dotsEl = card.querySelector('.pc-dots');
+    const nextBtn = card.querySelector('.pc-next-btn');
+
+    // Create dots
+    screens.forEach((s, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'pc-dot' + (i === 0 ? ' active' : '');
+      dotsEl.appendChild(dot);
+    });
+
+    function render() {
+      const s = screens[index];
+      img.src = s.img;
+      nameEl.textContent = s.name;
+      bulletsEl.innerHTML = s.bullets.map(b => '<li>' + b + '</li>').join('');
+      [nameEl, bulletsEl].forEach(el => { 
+        el.classList.remove('fade'); 
+        void el.offsetWidth; 
+        el.classList.add('fade'); 
+      });
+      dotsEl.querySelectorAll('.pc-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+
+    // Next button click
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      index = (index + 1) % screens.length;
+      render();
+    });
+
+    // Touch/Click to toggle open on mobile
+    card.addEventListener('click', function(e) {
+      // Don't toggle if clicking the next button or its children
+      if (e.target.closest('.pc-next-btn')) return;
+      this.classList.toggle('open');
+    });
+
+    // Hover for desktop
+    card.addEventListener('mouseenter', function() {
+      // Only auto-open on desktop (screen width > 768px)
+      if (window.innerWidth > 768) {
+        this.classList.add('open');
+      }
+    });
+    card.addEventListener('mouseleave', function() {
+      if (window.innerWidth > 768) {
+        this.classList.remove('open');
+      }
+    });
+  });
+
+  // ============================================
+  // ACTIVE NAV LINK HIGHLIGHT
+  // ============================================
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function() {
+      document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // ============================================
+  // CLOSE MOBILE MENU ON WINDOW RESIZE
+  // ============================================
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      closeMenu();
+    }
+  });
+
+  console.log('✅ Portfolio website loaded successfully!');
+  console.log('📱 Fully responsive on all devices.');
+</script>
+
+</body>
+</html>
